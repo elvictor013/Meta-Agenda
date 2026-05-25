@@ -101,7 +101,7 @@ Acesse no navegador: [http://localhost:8000](http://localhost:8000)
 | Campo | Valor |
 |-------|-------|
 | URL | http://localhost:8000/login/coordenador |
-| CPF | `03395672280` |
+| CPF | `xxxxxxxxxx` |
 | Senha | `123456` |
 
 ### Coordenador
