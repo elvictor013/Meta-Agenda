@@ -2,56 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AlunoRequest;
-use App\Models\Aluno;
+use App\Models\Curso;
 use App\Models\Notificacao;
-use Carbon\Carbon;
+use App\Models\Turma;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class AlunoController extends Controller
 {
     public function index()
     {
-        return view('aluno.index');
+        $cursos = Curso::orderBy('nome')->get();
+        return view('aluno.index', compact('cursos'));
     }
 
-    public function buscar(AlunoRequest $request)
+    public function getTurmas(Request $request)
     {
-        $aluno = Aluno::where('matricula', $request->matricula)->first();
+        $turmas = Turma::where('curso_id', $request->curso_id)
+            ->select('semestre')
+            ->distinct()
+            ->orderBy('semestre')
+            ->get();
+        return response()->json($turmas);
+    }
 
-        if (!$aluno) {
-            return back()->with('error', 'Matrícula não encontrada.');
+    public function getTurnos(Request $request)
+    {
+        $turnos = Turma::where('curso_id', $request->curso_id)
+            ->where('semestre', $request->semestre)
+            ->select('turno')
+            ->distinct()
+            ->orderBy('turno')
+            ->get();
+        return response()->json($turnos);
+    }
+
+    public function buscar(Request $request)
+    {
+        $request->validate([
+            'curso_id' => 'required|exists:cursos,id',
+            'semestre' => 'required|string',
+            'turno'    => 'required|string',
+        ]);
+
+        $turma = Turma::where('curso_id', $request->curso_id)
+            ->where('semestre', $request->semestre)
+            ->where('turno', $request->turno)
+            ->first();
+
+        if (!$turma) {
+            return back()->with('error', 'Nenhuma turma encontrada com essas informações.')->withInput();
         }
 
-        Session::put('aluno_id', $aluno->id);
+        Session::put('turma_id', $turma->id);
         return redirect()->route('aluno.dashboard');
     }
 
     public function dashboard()
     {
-        $alunoId = Session::get('aluno_id');
+        $turmaId = Session::get('turma_id');
 
-        if (!$alunoId) {
-            return redirect()->route('aluno.consulta')->with('error', 'Informe sua matrícula.');
+        if (!$turmaId) {
+            return redirect()->route('aluno.consulta')->with('error', 'Selecione seu curso, turma e turno.');
         }
 
-        $aluno = Aluno::with([
-            'turma.curso',
-            'turma.alocacoes.disciplina',
-            'turma.alocacoes.professor',
-            'turma.alocacoes.sala',
-            'turma.alocacoes.turmas',
-        ])->find($alunoId);
+        $turma = Turma::with([
+            'curso',
+            'alocacoes.disciplina',
+            'alocacoes.professor',
+            'alocacoes.sala',
+            'alocacoes.turmas',
+        ])->find($turmaId);
 
-        if (!$aluno || !$aluno->turma) {
-            Session::forget('aluno_id');
-            return redirect()->route('aluno.consulta')->with('error', 'Sessão inválida.');
+        if (!$turma) {
+            Session::forget('turma_id');
+            return redirect()->route('aluno.consulta')->with('error', 'Turma não encontrada.');
         }
 
-        // Alocações da turma do aluno, já carregadas
-        $alocacoes = $aluno->turma->alocacoes;
+        $alocacoes = $turma->alocacoes;
 
-        // Detectar próxima aula (hoje, a partir de agora)
         $diasMap = [
             0 => 'Domingo', 1 => 'Segunda', 2 => 'Terça',
             3 => 'Quarta',  4 => 'Quinta',  5 => 'Sexta', 6 => 'Sábado',
@@ -65,14 +94,14 @@ class AlunoController extends Controller
             ->sortBy('hora_inicio')
             ->first();
 
-        $notificacoes = Notificacao::where('turma_id', $aluno->turma_id)->latest()->get();
+        $notificacoes = Notificacao::where('turma_id', $turmaId)->latest()->get();
 
-        return view('aluno.dashboard', compact('aluno', 'alocacoes', 'notificacoes', 'proxima'));
+        return view('aluno.dashboard', compact('turma', 'alocacoes', 'notificacoes', 'proxima'));
     }
 
     public function logout()
     {
-        Session::forget('aluno_id');
+        Session::forget('turma_id');
         return redirect()->route('aluno.consulta');
     }
 }

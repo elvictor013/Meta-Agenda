@@ -182,7 +182,7 @@
             </a>
 
             <!-- Professor -->
-            <a href="{{ route('professor.consulta') }}"
+            <a href="#"
                 class="group relative bg-white border border-slate-200 rounded-xl p-8 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col items-center text-center gap-md border-b-4 border-b-[#2e7d32] active:scale-95">
 
                 <div class="w-20 h-20 rounded-full flex items-center justify-center mb-2 shadow-lg group-hover:scale-110 transition-transform" style="background-color: #2e7d32;">

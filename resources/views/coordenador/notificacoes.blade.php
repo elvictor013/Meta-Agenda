@@ -15,8 +15,8 @@
     @forelse($notificacoes as $notif)
     @php
     $tipos = ['urgente'=>['bg'=>'bg-red-50','border'=>'border-red-200','badge'=>'bg-red-100 text-red-700','icon'=>'priority_high','iconColor'=>'text-red-500'],
-              'cancelamento'=>['bg'=>'bg-orange-50','border'=>'border-orange-200','badge'=>'bg-orange-100 text-orange-700','icon'=>'cancel','iconColor'=>'text-orange-500'],
-              'alteração de sala'=>['bg'=>'bg-blue-50','border'=>'border-blue-200','badge'=>'bg-blue-100 text-blue-700','icon'=>'swap_horiz','iconColor'=>'text-blue-500']];
+    'cancelamento'=>['bg'=>'bg-orange-50','border'=>'border-orange-200','badge'=>'bg-orange-100 text-orange-700','icon'=>'cancel','iconColor'=>'text-orange-500'],
+    'alteração de sala'=>['bg'=>'bg-blue-50','border'=>'border-blue-200','badge'=>'bg-blue-100 text-blue-700','icon'=>'swap_horiz','iconColor'=>'text-blue-500']];
     $estilo = $tipos[$notif->tipo] ?? ['bg'=>'bg-white','border'=>'border-slate-200','badge'=>'bg-slate-100 text-slate-600','icon'=>'notifications','iconColor'=>'text-slate-400'];
     @endphp
     <div class="{{ $estilo['bg'] }} border {{ $estilo['border'] }} rounded-2xl p-5 flex gap-4 shadow-sm animate-in">
@@ -29,9 +29,11 @@
                     <h4 class="font-bold text-slate-800">{{ $notif->titulo }}</h4>
                     <p class="text-sm text-slate-600 mt-1">{{ $notif->mensagem }}</p>
                     <div class="flex items-center gap-2 mt-2 flex-wrap">
-                        <span class="px-2 py-0.5 bg-brand-50 text-brand-700 text-xs font-semibold rounded-full">{{ $notif->turma->nome ?? '—' }}</span>
+                        <span class="px-2 py-0.5 bg-brand-50 text-brand-700 text-xs font-semibold rounded-full">{{ ($notif->turma->curso->nome ?? '') . ' - ' . ($notif->turma->semestre ?? '') . ' - ' . ($notif->turma->turno ?? '') }}</span>
                         @if($notif->tipo)<span class="px-2 py-0.5 {{ $estilo['badge'] }} text-xs font-semibold rounded-full">{{ $notif->tipo }}</span>@endif
-                        <span class="text-xs text-slate-400">{{ $notif->created_at ? $notif->created_at->diffForHumans() : 'Agora mesmo' }}</span>
+                        <span class="text-xs text-slate-400">
+                            {{ $notif->created_at ? $notif->created_at->diffForHumans() : '' }}
+                        </span>
                     </div>
                 </div>
                 <button onclick="confirmDelete('{{ route('coord.notificacoes.delete',$notif->id) }}')" class="flex-shrink-0 p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
@@ -61,12 +63,15 @@
             <div><label class="block text-xs font-semibold text-slate-600 mb-1">Turma Destinatária</label>
                 <select name="turma_id" required class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
                     <option value="">Selecione a turma...</option>
-                    @foreach($turmas as $t)<option value="{{ $t->id }}">{{ $t->nome }} — {{ $t->curso->nome ?? '' }}</option>@endforeach
-                </select></div>
+                    @foreach($turmas as $t)<option value="{{ $t->id }}">{{ $t->curso->nome ?? '' }} — {{ $t->semestre }} — {{ $t->turno }}</option>@endforeach
+                </select>
+            </div>
             <div><label class="block text-xs font-semibold text-slate-600 mb-1">Título</label>
-                <input type="text" name="titulo" required placeholder="Ex: Aula cancelada" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></div>
+                <input type="text" name="titulo" required placeholder="Ex: Aula cancelada" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            </div>
             <div><label class="block text-xs font-semibold text-slate-600 mb-1">Mensagem</label>
-                <textarea name="mensagem" required rows="3" placeholder="Detalhes do comunicado..." class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea></div>
+                <textarea name="mensagem" required rows="3" placeholder="Detalhes do comunicado..." class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"></textarea>
+            </div>
             <div><label class="block text-xs font-semibold text-slate-600 mb-1">Tipo</label>
                 <select name="tipo" class="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
                     <option value="">Aviso Geral</option>
@@ -74,7 +79,8 @@
                     <option value="cancelamento">❌ Cancelamento</option>
                     <option value="alteração de sala">🔁 Alteração de Sala</option>
                     <option value="institucional">🏛️ Institucional</option>
-                </select></div>
+                </select>
+            </div>
             <div class="flex gap-3 pt-2">
                 <button type="button" onclick="closeModal('modalCriar')" class="flex-1 border border-slate-200 text-slate-600 px-4 py-2.5 rounded-xl text-sm font-semibold">Cancelar</button>
                 <button type="submit" class="flex-1 bg-brand-900 text-white px-4 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2"><span class="ms">send</span> Enviar</button>
@@ -97,9 +103,20 @@
 @endsection
 @section('scripts')
 <script>
-function openModal(id){ document.getElementById(id).classList.remove('hidden'); }
-function closeModal(id){ document.getElementById(id).classList.add('hidden'); }
-function confirmDelete(url){ document.getElementById('formDelete').action = url; openModal('modalDelete'); }
-document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', function(e){ if(e.target===this) this.classList.add('hidden'); }));
+    function openModal(id) {
+        document.getElementById(id).classList.remove('hidden');
+    }
+
+    function closeModal(id) {
+        document.getElementById(id).classList.add('hidden');
+    }
+
+    function confirmDelete(url) {
+        document.getElementById('formDelete').action = url;
+        openModal('modalDelete');
+    }
+    document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', function(e) {
+        if (e.target === this) this.classList.add('hidden');
+    }));
 </script>
 @endsection

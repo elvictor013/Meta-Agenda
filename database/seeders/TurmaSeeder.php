@@ -2,19 +2,46 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Turma;
 
 class TurmaSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run()
+    public function run(): void
     {
-        \App\Models\Turma::insert([
-            ['nome' => 'SI-1A', 'semestre' => '1 Semestre', 'turno' => 'Matutino', 'curso_id' => 1],
-            ['nome' => 'SI-2A', 'semestre' => '2 Semestre', 'turno' => 'Matutino', 'curso_id' => 1],
+        Turma::insert([
+            [
+                'nome' => 'TSI 1º Semestre',
+                'semestre' => '1º Semestre',
+                'turno' => 'Noite',
+                'curso_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nome' => 'TSI 2º Semestre',
+                'semestre' => '2º Semestre',
+                'turno' => 'Noite',
+                'curso_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nome' => 'TSI 1º Semestre',
+                'semestre' => '1º Semestre',
+                'turno' => 'Manhã',
+                'curso_id' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'nome' => 'Redes 1º Semestre',
+                'semestre' => '1º Semestre',
+                'turno' => 'Noite',
+                'curso_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }

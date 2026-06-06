@@ -47,7 +47,7 @@ $alocPorDia = $alocacoes->groupBy('dia_semana');
                     <p class="font-semibold text-slate-800">{{ $aloc->disciplina->nome ?? '—' }}</p>
                     <div class="flex flex-wrap gap-1.5 mt-1">
                         @foreach($aloc->turmas as $t)
-                        <span class="px-2 py-0.5 bg-brand-50 text-brand-700 text-xs font-semibold rounded-full">{{ $t->nome }}</span>
+                        <span class="px-2 py-0.5 bg-brand-50 text-brand-700 text-xs font-semibold rounded-full">{{ $t->semestre . ' ' . $t->turno }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -123,7 +123,7 @@ $alocPorDia = $alocacoes->groupBy('dia_semana');
                     @foreach($turmas as $t)
                     <label class="flex items-center gap-2 cursor-pointer hover:bg-slate-50 rounded-lg px-2 py-1">
                         <input type="checkbox" name="turmas[]" value="{{ $t->id }}" class="rounded">
-                        <span class="text-sm text-slate-700">{{ $t->nome }}</span>
+                        <span class="text-sm text-slate-700">{{ $t->semestre . ' ' . $t->turno }}</span>
                         <span class="text-xs text-slate-400">{{ $t->curso->nome ?? '' }}</span>
                     </label>
                     @endforeach
@@ -174,7 +174,7 @@ $alocPorDia = $alocacoes->groupBy('dia_semana');
                     @foreach($turmas as $t)
                     <label class="flex items-center gap-2 cursor-pointer hover:bg-slate-50 rounded-lg px-2 py-1">
                         <input type="checkbox" name="turmas[]" value="{{ $t->id }}" class="turma-check rounded">
-                        <span class="text-sm text-slate-700">{{ $t->nome }}</span>
+                        <span class="text-sm text-slate-700">{{ $t->semestre . ' ' . $t->turno }}</span>
                         <span class="text-xs text-slate-400">{{ $t->curso->nome ?? '' }}</span>
                     </label>
                     @endforeach

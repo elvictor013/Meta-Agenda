@@ -1,208 +1,209 @@
 <!DOCTYPE html>
-
-<html class="light" lang="pt-br">
-
+<html class="light" lang="pt-BR">
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
-    <script id="tailwind-config">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
         tailwind.config = {
-            darkMode: "class",
             theme: {
                 extend: {
-                    "colors": {
-                        "tertiary-fixed-dim": "#f7b993",
-                        "tertiary-container": "#381600",
-                        "surface-variant": "#e5e1e6",
-                        "on-error-container": "#93000a",
-                        "on-secondary-container": "#745a00",
-                        "on-primary-fixed-variant": "#3f4274",
-                        "on-secondary": "#ffffff",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-fixed-dim": "#edc14a",
-                        "inverse-surface": "#303034",
-                        "primary-fixed-dim": "#bfc2fc",
-                        "on-tertiary-fixed": "#311300",
-                        "surface-dim": "#dcd9de",
-                        "on-surface": "#1b1b1f",
-                        "surface-container-high": "#eae7ec",
-                        "secondary-container": "#ffd259",
-                        "primary-fixed": "#e0e0ff",
-                        "surface-container": "#f0edf2",
+                    colors: {
                         "primary": "#000032",
-                        "on-primary-container": "#8083b9",
-                        "error-container": "#ffdad6",
-                        "surface-container-highest": "#e5e1e6",
-                        "on-tertiary-container": "#b17b59",
-                        "on-primary-fixed": "#131546",
-                        "error": "#ba1a1a",
-                        "surface-container-low": "#f6f2f7",
-                        "on-secondary-fixed-variant": "#594400",
-                        "tertiary": "#120400",
-                        "secondary-fixed": "#ffdf93",
                         "primary-container": "#171a4a",
-                        "background": "#fcf8fd",
-                        "outline-variant": "#c7c5d0",
-                        "outline": "#777680",
-                        "inverse-primary": "#bfc2fc",
-                        "on-background": "#1b1b1f",
-                        "on-secondary-fixed": "#241a00",
-                        "on-primary": "#ffffff",
-                        "on-error": "#ffffff",
-                        "surface-bright": "#fcf8fd",
+                        "secondary-container": "#ffd259",
                         "surface": "#fcf8fd",
-                        "on-tertiary": "#ffffff",
+                        "on-surface": "#1b1b1f",
                         "on-surface-variant": "#46464f",
-                        "surface-tint": "#575a8d",
-                        "inverse-on-surface": "#f3eff4",
-                        "secondary": "#765b00",
-                        "on-tertiary-fixed-variant": "#673c1f",
-                        "tertiary-fixed": "#ffdbc7"
+                        "surface-container-low": "#f6f2f7",
+                        "outline": "#777680",
+                        "outline-variant": "#c7c5d0",
                     },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "xs": "0.25rem",
-                        "base": "8px",
-                        "xl": "3rem",
-                        "container_max_width": "1320px",
-                        "sm": "0.5rem",
-                        "md": "1rem",
-                        "lg": "1.5rem",
-                        "gutter": "1.5rem"
-                    },
-                    "fontFamily": {
-                        "h2": ["Manrope"],
-                        "h1": ["Manrope"],
-                        "button": ["Manrope"],
-                        "body-lg": ["Manrope"],
-                        "body-md": ["Manrope"],
-                        "h3": ["Manrope"],
-                        "label-sm": ["Manrope"]
-                    },
-                    "fontSize": {
-                        "h2": ["2rem", {
-                            "lineHeight": "1.3",
-                            "fontWeight": "600"
-                        }],
-                        "h1": ["2.5rem", {
-                            "lineHeight": "1.2",
-                            "fontWeight": "700"
-                        }],
-                        "button": ["1rem", {
-                            "lineHeight": "1",
-                            "letterSpacing": "0.01em",
-                            "fontWeight": "600"
-                        }],
-                        "body-lg": ["1.125rem", {
-                            "lineHeight": "1.6",
-                            "fontWeight": "400"
-                        }],
-                        "body-md": ["1rem", {
-                            "lineHeight": "1.5",
-                            "fontWeight": "400"
-                        }],
-                        "h3": ["1.75rem", {
-                            "lineHeight": "1.3",
-                            "fontWeight": "600"
-                        }],
-                        "label-sm": ["0.875rem", {
-                            "lineHeight": "1.4",
-                            "letterSpacing": "0.02em",
-                            "fontWeight": "500"
-                        }]
-                    }
-                },
-            },
+                    fontFamily: { sans: ["Manrope", "sans-serif"] },
+                }
+            }
         }
     </script>
     <style>
-        body {
-            font-family: 'Manrope', sans-serif;
-            background-color: #fcf8fd;
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-    </style>
-    <style>
-        body {
-            min-height: max(884px, 100dvh);
+        * { font-family: 'Manrope', sans-serif; }
+        body { min-height: max(884px, 100dvh); background: #fcf8fd; }
+        .step { opacity: 0.4; pointer-events: none; transition: opacity .3s; }
+        .step.active { opacity: 1; pointer-events: auto; }
+        .select-custom {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23777680' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
         }
     </style>
 </head>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
 
-<body class="bg-background min-h-screen flex flex-col items-center justify-center p-md">
-    <!-- TopAppBar - Brand Anchor -->
-    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-white dark:bg-slate-950 border-b border-gray-200 dark:border-gray-800 shadow-sm">
-        <div class="flex items-center gap-xs">
-            <span class="material-symbols-outlined text-[#171a4a] text-xl" data-icon="school">school</span>
-            <div class="flex flex-col">
-                <span class="text-xl font-extrabold text-[#171a4a] dark:text-blue-200 tracking-wider">MetaAgenda</span>
-                <span class="text-[10px] font-medium uppercase tracking-widest text-outline">Consulta Acadêmica</span>
+    <!-- Header fixo -->
+    <header class="fixed top-0 left-0 w-full z-50 flex items-center px-4 h-14 bg-[#171a4a] shadow-sm">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-white text-xl" style="font-variation-settings:'FILL' 1">school</span>
+            <div>
+                <span class="text-base font-extrabold text-white tracking-tight">MetaAgenda</span>
+                <p class="text-[10px] font-medium text-white/60 uppercase tracking-widest -mt-0.5">Consulta Acadêmica</p>
             </div>
         </div>
     </header>
-    <main class="w-full max-w-[400px] mt-20 flex flex-col items-center">
-        <!-- Hero Decorative Element -->
-        <div class="w-24 h-24 mb-lg rounded-full bg-primary-container flex items-center justify-center shadow-lg">
-            <span class="material-symbols-outlined text-white text-4xl" data-icon="account_circle" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+
+    <main class="w-full max-w-sm mt-14 flex flex-col items-center py-8">
+
+        <!-- Ícone -->
+        <div class="w-20 h-20 mb-6 rounded-full bg-[#171a4a] flex items-center justify-center shadow-lg">
+            <span class="material-symbols-outlined text-white text-4xl" style="font-variation-settings:'FILL' 1">calendar_month</span>
         </div>
 
-        <!-- Central Access Card -->
-        <div class="w-full bg-surface-container-lowest rounded-xl p-lg border border-outline-variant shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-            <div class="text-center mb-lg">
-                <h1 class="font-h2 text-h2 text-on-surface mb-xs">Acesso do Aluno</h1>
-                <p class="font-body-md text-on-surface-variant text-sm">Insira suas credenciais institucionais para visualizar sua agenda acadêmica.</p>
+        <!-- Card -->
+        <div class="w-full bg-white rounded-2xl border border-[#c7c5d0] shadow-sm p-6 space-y-5">
+            <div class="text-center">
+                <h1 class="text-xl font-extrabold text-[#1b1b1f]">Consultar Horários</h1>
+                <p class="text-sm text-[#46464f] mt-1">Selecione seu curso, semestre e turno para ver sua grade de aulas.</p>
             </div>
-            <x-alert/>
-            <form class="space-y-lg" method="POST" action="{{ route('aluno.buscar') }}">
+
+            @if(session('error'))
+            <div class="flex items-center gap-2 bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm font-medium">
+                <span class="material-symbols-outlined text-base">error</span>
+                {{ session('error') }}
+            </div>
+            @endif
+
+            <form method="POST" action="{{ route('aluno.buscar') }}" class="space-y-4">
                 @csrf
-                <div class="space-y-xs">
-                    <label class="font-label-sm text-label-sm text-on-surface-variant px-xs" for="matricula">Matrícula</label>
-                    <div class="relative">
-                        <span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline" data-icon="badge">badge</span>
-                        <input class="w-full pl-xl pr-md py-md bg-surface-container-low border border-outline-variant rounded-lg font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container/20 focus:border-primary-container transition-all placeholder:text-outline/50" name="matricula" id="matricula" placeholder="Digite sua matrícula" type="text" />
-                    </div>
+
+                {{-- PASSO 1: CURSO --}}
+                <div>
+                    <label class="block text-xs font-bold text-[#46464f] uppercase tracking-wider mb-1.5">
+                        <span class="flex items-center gap-1">
+                            <span class="w-5 h-5 rounded-full bg-[#171a4a] text-white text-[10px] flex items-center justify-center font-bold">1</span>
+                            Curso
+                        </span>
+                    </label>
+                    <select name="curso_id" id="selectCurso" onchange="carregarSemestres()"
+                        class="select-custom w-full border border-[#c7c5d0] rounded-xl px-4 py-3 text-sm text-[#1b1b1f] bg-[#f6f2f7] focus:outline-none focus:ring-2 focus:ring-[#171a4a]">
+                        <option value="">— Selecione o curso —</option>
+                        @foreach($cursos as $curso)
+                        <option value="{{ $curso->id }}" {{ old('curso_id') == $curso->id ? 'selected' : '' }}>
+                            {{ $curso->nome }}
+                        </option>
+                        @endforeach
+                    </select>
                 </div>
-                <button
-                    class="w-full h-14 bg-primary-container text-white font-button text-button rounded-lg shadow-sm hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-sm"
-                    type="submit">
-                    Acessar
-                    <span class="material-symbols-outlined">arrow_forward</span>
+
+                {{-- PASSO 2: SEMESTRE --}}
+                <div id="stepSemestre" class="step">
+                    <label class="block text-xs font-bold text-[#46464f] uppercase tracking-wider mb-1.5">
+                        <span class="flex items-center gap-1">
+                            <span class="w-5 h-5 rounded-full bg-[#171a4a] text-white text-[10px] flex items-center justify-center font-bold">2</span>
+                            Semestre
+                        </span>
+                    </label>
+                    <select name="semestre" id="selectSemestre" onchange="carregarTurnos()"
+                        class="select-custom w-full border border-[#c7c5d0] rounded-xl px-4 py-3 text-sm text-[#1b1b1f] bg-[#f6f2f7] focus:outline-none focus:ring-2 focus:ring-[#171a4a]">
+                        <option value="">— Selecione o semestre —</option>
+                    </select>
+                </div>
+
+                {{-- PASSO 3: TURNO --}}
+                <div id="stepTurno" class="step">
+                    <label class="block text-xs font-bold text-[#46464f] uppercase tracking-wider mb-1.5">
+                        <span class="flex items-center gap-1">
+                            <span class="w-5 h-5 rounded-full bg-[#171a4a] text-white text-[10px] flex items-center justify-center font-bold">3</span>
+                            Turno
+                        </span>
+                    </label>
+                    <select name="turno" id="selectTurno"
+                        class="select-custom w-full border border-[#c7c5d0] rounded-xl px-4 py-3 text-sm text-[#1b1b1f] bg-[#f6f2f7] focus:outline-none focus:ring-2 focus:ring-[#171a4a]">
+                        <option value="">— Selecione o turno —</option>
+                    </select>
+                </div>
+
+                <button type="submit" id="btnConsultar"
+                    class="w-full bg-[#171a4a] hover:bg-[#000032] text-white font-bold py-3.5 rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-40"
+                    disabled>
+                    <span class="material-symbols-outlined text-base">search</span>
+                    Ver Horários
                 </button>
             </form>
-            <div class="mt-lg pt-lg border-t border-surface-variant flex flex-col items-center gap-md">
-                <a class="font-label-sm text-primary-container font-bold hover:underline underline-offset-4 flex items-center gap-xs" href="{{ route('login.coordenador') }}">
-                    <span class="material-symbols-outlined text-[18px]" data-icon="admin_panel_settings">admin_panel_settings</span>
+
+            <div class="pt-4 border-t border-[#c7c5d0] text-center space-y-2">
+                <a href="{{ route('professor.consulta') }}" class="flex items-center justify-center gap-1.5 text-xs font-semibold text-[#46464f] hover:text-[#171a4a]">
+                    <span class="material-symbols-outlined text-sm">cast_for_education</span>
+                    Sou professor
+                </a>
+                <a href="{{ route('login.coordenador') }}" class="flex items-center justify-center gap-1.5 text-xs font-semibold text-[#46464f] hover:text-[#171a4a]">
+                    <span class="material-symbols-outlined text-sm">admin_panel_settings</span>
                     Sou coordenador
                 </a>
             </div>
-            
         </div>
-        <!-- Support Info -->
-        <footer class="mt-xl text-center">
-            <p class="font-body-md text-[12px] text-outline px-lg">
-                Precisa de ajuda com seu acesso? Entre em contato com a secretaria acadêmica de sua unidade.
-            </p>
-        </footer>
-    </main>
-    <!-- Visual Background Element -->
-    <div class="fixed -bottom-20 -left-20 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl -z-10"></div>
-    <div class="fixed -top-20 -right-20 w-80 h-80 bg-secondary-container/10 rounded-full blur-3xl -z-10"></div>
-    <!-- Background Context Image for Theme Integrity -->
-    <div class="hidden">
-        <img data-alt="A striking digital installation art piece featuring glowing, generative geometric shapes suspended in a vast, minimalist gallery space. The room is illuminated by high-key, soft white lighting that creates a bright, modern light-mode aesthetic. The artwork relies on a sophisticated palette of deep navy blues and pristine whites, punctuated by intense accents of scholarly gold. The mood is serene yet technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_xle_fenCMabWpBeziJ7WH45_rzcOAAYK3APYccffAVRhN6TQc4e6RM9z8r0TptxC656fiGGU_SjZST6tjvDTccrEuDy5_yPtvpU2dG5DE2pys9ootDsAVFSNv5rv-1EeshY306UIKaQTNVPlCaI0_QDYexUJFYeIG_3AKNiifATHeIYfQ4yS8B0kx8L0B5oHz3Hum-ReOPRvJrzfAzy90RX5MtKu15mLedvtu63btEfFsiUMN7Fskupb66am6WN0OAeK6UKaiw" />
-    </div>
-</body>
 
+        <p class="text-center text-[#777680] text-xs mt-6">MetaAgenda · Sistema Acadêmico</p>
+    </main>
+
+</body>
+<script>
+async function carregarSemestres() {
+    const cursoId = document.getElementById('selectCurso').value;
+    const stepSem = document.getElementById('stepSemestre');
+    const stepTur = document.getElementById('stepTurno');
+    const btn = document.getElementById('btnConsultar');
+
+    // Reset
+    document.getElementById('selectSemestre').innerHTML = '<option value="">— Selecione o semestre —</option>';
+    document.getElementById('selectTurno').innerHTML = '<option value="">— Selecione o turno —</option>';
+    stepSem.classList.remove('active');
+    stepTur.classList.remove('active');
+    btn.disabled = true;
+
+    if (!cursoId) return;
+
+    const res = await fetch(`/aluno/turmas?curso_id=${cursoId}`);
+    const data = await res.json();
+
+    const sel = document.getElementById('selectSemestre');
+    data.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t.semestre;
+        opt.textContent = t.semestre;
+        sel.appendChild(opt);
+    });
+
+    if (data.length > 0) stepSem.classList.add('active');
+}
+
+async function carregarTurnos() {
+    const cursoId = document.getElementById('selectCurso').value;
+    const semestre = document.getElementById('selectSemestre').value;
+    const stepTur = document.getElementById('stepTurno');
+    const btn = document.getElementById('btnConsultar');
+
+    document.getElementById('selectTurno').innerHTML = '<option value="">— Selecione o turno —</option>';
+    stepTur.classList.remove('active');
+    btn.disabled = true;
+
+    if (!semestre) return;
+
+    const res = await fetch(`/aluno/turnos?curso_id=${cursoId}&semestre=${encodeURIComponent(semestre)}`);
+    const data = await res.json();
+
+    const sel = document.getElementById('selectTurno');
+    data.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t.turno;
+        opt.textContent = t.turno;
+        sel.appendChild(opt);
+    });
+
+    if (data.length > 0) {
+        stepTur.classList.add('active');
+        sel.onchange = () => { btn.disabled = !sel.value; };
+    }
+}
+</script>
 </html>

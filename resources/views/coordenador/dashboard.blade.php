@@ -13,7 +13,7 @@
             ['label'=>'Alocações','value'=>$totalAlocacoes,'icon'=>'calendar_month','color'=>'bg-brand-900','light'=>'bg-brand-50 text-brand-700'],
             ['label'=>'Turmas','value'=>$totalTurmas,'icon'=>'groups','color'=>'bg-violet-700','light'=>'bg-violet-50 text-violet-700'],
             ['label'=>'Professores','value'=>$totalProfessores,'icon'=>'person_search','color'=>'bg-emerald-700','light'=>'bg-emerald-50 text-emerald-700'],
-            ['label'=>'Alunos','value'=>$totalAlunos,'icon'=>'school','color'=>'bg-amber-600','light'=>'bg-amber-50 text-amber-700'],
+            
         ];
         @endphp
         @foreach($stats as $s)

@@ -26,9 +26,6 @@
 <a href="{{ route('coord.professores') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors {{ str_starts_with($current, 'coord.professores') ? 'active' : '' }}">
     <span class="ms text-xl">person_search</span> Professores
 </a>
-<a href="{{ route('coord.alunos') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors {{ str_starts_with($current, 'coord.alunos') ? 'active' : '' }}">
-    <span class="ms text-xl">school</span> Alunos
-</a>
 <a href="{{ route('coord.disciplinas') }}" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors {{ str_starts_with($current, 'coord.disciplinas') ? 'active' : '' }}">
     <span class="ms text-xl">menu_book</span> Disciplinas
 </a>

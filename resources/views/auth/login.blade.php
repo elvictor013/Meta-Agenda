@@ -208,7 +208,8 @@
                 </form>
                 <div class="mt-xl pt-lg border-t border-outline-variant/30 text-center">
                     <p class="font-label-sm text-label-sm text-on-surface-variant">
-                        <a class="text-primary font-bold hover:underline" href="/">Dashboard</a>
+                        Problemas com o acesso?
+                        <a class="text-primary font-bold hover:underline" href="#">Contate o Suporte TI</a>
                     </p>
                 </div>
             </div>

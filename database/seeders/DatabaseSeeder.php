@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
             ProfessorSeeder::class,
             DisciplinaSeeder::class,
             SalaSeeder::class,
-            AlunoSeeder::class,
             AlocacaoSeeder::class,
             NotificacaoSeeder::class,
         ]);

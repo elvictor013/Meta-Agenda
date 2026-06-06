@@ -9,11 +9,6 @@ class Turma extends Model
     protected $table = 'turmas';
     protected $fillable = ['nome', 'semestre', 'turno', 'curso_id'];
 
-    public function alunos()
-    {
-        return $this->hasMany(Aluno::class);
-    }
-
     public function curso()
     {
         return $this->belongsTo(Curso::class);
@@ -27,5 +22,11 @@ class Turma extends Model
     public function notificacoes()
     {
         return $this->hasMany(Notificacao::class);
+    }
+
+    public function getNomeCompletoAttribute(): string
+    {
+        $curso = $this->curso->nome ?? '';
+        return "{$curso} - {$this->semestre} - {$this->turno}";
     }
 }
