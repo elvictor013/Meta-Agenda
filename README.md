@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MetaAgenda — Guia de Instalação
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Pré-requisitos
 
-## About Laravel
+* PHP 8.2+
+* MySQL 8+
+* Composer
+* Node.js (opcional, apenas se quiser compilar assets)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Passo a Passo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 1. Configurar o banco de dados
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Crie o banco no MySQL:
 
-## Learning Laravel
+```sql
+CREATE DATABASE meta_agenda CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Configurar o .env
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Edite o arquivo `.env` com seus dados:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```env
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=meta_agenda
+DB_USERNAME=root
+DB_PASSWORD=sua_senha_aqui
+```
 
-## Laravel Sponsors
+### 3. Instalar dependências
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer install
+```
 
-### Premium Partners
+### 4. Gerar chave da aplicação
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```bash
+php artisan key:generate
+```
 
-## Contributing
+### 5. Executar migrations + seeders
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan migrate --seed
+```
 
-## Code of Conduct
+### 6. Iniciar o servidor
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+Acesse: `http://localhost:8000`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Credenciais de Acesso
 
-## License
+### Administrador (Coordenador com is_admin=true)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* **URL:** `http://localhost:8000/login/coordenador`
+* **Senha:** `123456`
+
+### Coordenador Normal
+
+* **URL:** `http://localhost:8000/login/coordenador`
+* **CPF:** `12345678900`
+* **Senha:** `123456`
+
+### Aluno (sem senha, só matrícula)
+
+* **URL:** `http://localhost:8000/aluno`
+* **Matrícula:** `2024001` (criada pelo seeder)
+
+### Professor (sem senha, só CPF)
+
+* **URL:** `http://localhost:8000/professor`
+* **CPF do professor criado pelo seeder** (ver tabela professores)
+
+## Estrutura de Perfis
+
+| Perfil                          | Acesso                                            |
+| ------------------------------- | ------------------------------------------------- |
+| Administrador (`is_admin=true`) | Gerencia cursos e coordenadores                   |
+| Coordenador                     | Gerencia tudo acadêmico (turmas, alocações, etc.) |
+| Professor                       | Consulta horários pelo CPF                        |
+| Aluno                           | Consulta horários pela matrícula                  |
+
+## Funcionalidades Implementadas
+
+✅ Login/Logout coordenador e admin
+✅ Dashboard admin com CRUD de cursos e coordenadores
+✅ Dashboard coordenador com estatísticas
+✅ CRUD completo: turmas, professores, alunos, disciplinas, salas
+✅ Criação de alocações com múltiplas turmas
+✅ Verificação de conflitos de horário (professor, sala, turma)
+✅ Envio de notificações por turma
+✅ Dashboard do aluno (consulta por matrícula)
+✅ Dashboard do professor (consulta por CPF)
+✅ Proteção de rotas admin com middleware
+✅ Separação de permissões por cursos vinculados
